@@ -1,0 +1,308 @@
+{% extends 'Hunarmand_Admin/base.html' %}
+{% load static %}
+{% block content %}
+{% for i in anketa  %}
+<section class="service-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section_title text-center type_two">
+                   <br><br><br>
+                    <div class="title_whole">
+                        <h2 class="title">Ma'lumotnomasi</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!---============spacing==========--->
+        <div class="pd_bottom_40"></div>
+        <!---============spacing==========--->
+
+    </div>
+    <!---============spacing==========--->
+    <div class="pd_bottom_80"></div>
+    <!---============spacing==========--->
+</section>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div style="width: 100%;background-color: aliceblue; border-radius: 10px;height: 60vh;">
+                <br>
+                {% for i in  anketa_image_profile%}
+                {% if i.image_profile %}
+                <div style="justify-content: center; display: flex;align-items: center;margin: 10px;">
+                    <img width="128px" style="border-radius: 10px;" src="{{ i.image_profile.url }}"  alt="">
+                </div>
+                {% else %}
+                <div style="justify-content: center; display: flex;align-items: center;margin: 10px;">
+                    <img width="128px" style="border-radius: 10px;" src="{% static 'assets/images/profile.png' %}"  alt="">
+                </div>
+                {% endif %}
+                {% endfor %}
+                <br>
+                <div style="text-align: center;" >
+                    <h5>{{i.fist_name}} {{i.sur_name}} {{i.mid_name}}</h5><br><br>
+                    <h5><i class="fa fa-phone"></i>  {{i.phone}}</h5>
+                    <h5><i class="fa fa-envelope"></i>  {{i.email}}</h5>
+
+
+                </div>
+
+
+         
+
+
+            
+            </div>
+        </div>
+       
+            <div class="col-md-8">
+                
+         
+                  <div class="tab-content" id="tab-content">
+
+
+
+                    <div class="tab-pane active" id="fill-tabpanel-0" role="tabpanel" aria-labelledby="fill-tab-0">
+                        
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="validationDefault02">Tug'ilgan Kun</label>
+                                    <input  type="text" name="birthday" readonly class="form-control form-control-lg" value="{{i.birthday}}" id="validationDefault02"  required>
+                                  </div>
+                                  <div class="col-md-4 mb-3">
+                                    <label for="validationDefault02">Millat</label>
+                                    <input type="text" name="millati" readonly class="form-control" value="{{ i.millati }}"  required>
+                                  </div>
+                                  <div class="col-md-4 mb-3">
+                                    <label for="validationDefault02">Ma'lumoti</label>
+                                    <input type="text" name="information" readonly class="form-control" value="{{i.information}}"  required>
+                                  </div>
+                                  <div class="col-md-4 mb-3">
+                                    <label for="validationDefault02">Fuqorlik</label>
+                                    <input type="text" name="ctzn" readonly class="form-control" value="{{i.ctzn}}"  required>
+                                  </div>
+                                  <div class="col-md-4 mb-3">
+                                    <label for="validationDefault02">Pasport seryasi</label>
+                                    <input type="text" class="form-control"   value="{{i.pport_no}}"  required readonly> 
+                                  </div>
+                                  <div class="col-md-4 mb-3">
+                                    <label for="validationDefault02">STIR</label>
+                                    <input type="text" class="form-control"  value="{{i.tin}}"   required readonly>
+                                  </div>
+                                  <div class="col-md-4 mb-3">
+                                    <label for="validationDefault02">JSHSHIR</label>
+                                    <input type="text" class="form-control" value="{{i.pin}}"  required readonly> 
+                                  </div>
+                                  <div class="col-md-4 mb-3">
+                                    <label for="validationDefault02">Guvohnoma raqami</label>
+                                    <input type="text" class="form-control"  value="{{i.guvohnoma}}"  readonly required>
+                                  </div>
+                                  <div class="col-md-4 mb-3">
+                                    <label for="validationDefault02">Ro'yhadan o'tgan sanasi</label>
+                                    <input width="100%" type="text" class="form-control" value="{{i.guvohnoma_start_date}}" readonly  required>
+                                  </div>
+                                  <div class="col-md-6 mb-3">
+                                    <label for="validationDefault02">Amal qilish mudati</label>
+                                    <input type="text" class="form-control" value="{{i.guvohnoma_end_date}}"  readonly  required>
+                                  </div>
+                                  <div class="col-md-6 mb-3">
+                                    <label for="validationDefault02">Uyushmaga A'zo bo'lgan yili</label>
+                                    <input type="text" class="form-control" value="{{i.memberyear}}" readonly id="DeleteRow"   required>
+                                  </div>
+                                  
+                                  <div class="col-md-12 mb-3">
+                                    <label for="validationDefault02">Faoliyat Turi</label>
+                                    <input type="text" class="form-control form-control-lg" value="{{i.job}}" id="validationDefault02"  readonly  required>
+                                  </div>
+                                  
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+
+
+
+
+                    <div class="tab-pane" id="fill-tabpanel-1" role="tabpanel" aria-labelledby="fill-tab-1">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group">
+                                    <label for="validationDefault02">Viloyat:</label>
+                                    <input type="text" name="viloyati" class="form-control" id="validationDefault02" value="{{anketa.viloyati}}" readonly  required>
+                                  </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="validationDefault02">Tuman:</label>
+                                    <input type="text" name="tumani" class="form-control" id="validationDefault02" value="{{anketa.tumani}}" readonly  required>
+                                  </div>
+                                  <div class="col-md-4 col-sm-12">
+                                    <div class="form-group">
+                                    <label  for="validationDefault02">Mahala</label>
+                                    <input  type="text" class="form-control" id="validationDefault02" value="{{anketa.mahalla}}"   required readonly>
+                                  </div>
+                                </div>
+                                <div class="col-md-12 mb-3">
+                                    <label for="validationDefault02">Uy manzili</label>
+                                    <input type="text" name="yashash_manzili" class="form-control" id="validationDefault02" value=" {{anketa.yashash_manzili}}"  required readonly>
+                                  </div>
+
+                                  <div class="col-md-4 mb-3">
+                                    <label for="validationDefault02">Faoliyat viloyati:</label>
+                                    <input type="text" name="viloyati" value="{{anketa.mahalla}}"     class="form-control" id="validationDefault02" value="{{anketa.viloyati}}" readonly  required>
+                                  </div>
+                                  <div class="col-md-4 mb-3">
+                                    <label for="validationDefault02">Faoliyat Tumani</label>
+                                    <input type="text" name="viloyati"  value="{{anketa.mahalla}}"    class="form-control" id="validationDefault02" value="{{anketa.viloyati}}" readonly  required>
+                                  </div>
+                                  <div class="col-md-4 mb-3">
+                                    <label for="validationDefault02">Faoliyat Uy manzili</label>
+                                    <input type="text" value="{{anketa.fl_address_U}}"    class="form-control" id="validationDefault02"  readonly  required>
+                                  </div>
+                                  <div class="col-md-12 mb-3">
+                                    <label for="validationDefault02">Shogirtlari soni</label>
+                                    <input  type="text" name="birthday" value="{{ anketa.number_of_students }}" readonly class="form-control form-control-lg" id="validationDefault02"    required>
+                                  </div>
+                                  <div class="col-md-12 mb-3">
+                                    <label for="validationDefault02">Quydagi qaysi biriga egasiz</label>
+                                    <input  type="text" name="birthday" value="{{ anketa.girft }}" readonly class="form-control form-control-lg" id="validationDefault02"    required>
+                                  </div>
+                                  <div class="col-md-12 mb-3">
+                                    <button class="btn btn-primary" style="width: 100%;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                     Ko'proq
+                                    </button>
+                                  </div>
+                                
+                                  <div class="collapse" id="collapseExample">
+                                    <div class="container">
+                                      <div class="row">
+                                    <div class="col-md-12">
+                                      <label for="exampleFormControlTextarea1">Davlat Mukofati(Batafsil)</label>
+                                      <textarea readonly  class="form-control"  id="exampleFormControlTextarea1" rows="2">{{anketa.state_award}}</textarea>
+                                    </div><br><br>
+                                    <div class="col-md-12">
+                                      <label for="exampleFormControlTextarea1">Yurtimizda o'tkazilgan tadbirlar(Batafsil)</label>
+                                      <textarea readonly class="form-control" id="exampleFormControlTextarea1" rows="2">{{anketa.yurtmizda_tadbir}}</textarea>
+                                    </div>
+                                    <div class="col-md-12">
+                                      <label for="exampleFormControlTextarea1">Xorijda o'tkazilgan tadbirlar(Batafsil)</label>
+                                      <textarea readonly class="form-control" id="exampleFormControlTextarea1" rows="2">{{anketa.xorjiy_tadbir}}</textarea>
+                                    </div>
+                                    <div class="col-md-12">
+                                      <label for="exampleFormControlTextarea1">Shaxsiy ko'rgazmalar(Batafsil)</label>
+                                      <textarea readonly class="form-control" id="exampleFormControlTextarea1" rows="2">{{ anketa.personal_event }}</textarea>
+                                    </div>
+                                    <div class="col-md-12">
+                                      <label for="exampleFormControlTextarea1">Ijodingizni o'ziga hosligi</label>
+                                      <textarea readonly class="form-control" id="exampleFormControlTextarea1" rows="2">{{ anketa.creativity }}</textarea>
+                                    </div>
+                                    <div class="col-md-12">
+                                      <label for="exampleFormControlTextarea1">Ishlab chiqargan mahsulot turlari va nomlari </label>
+                                      <textarea readonly class="form-control" id="exampleFormControlTextarea1" rows="2">{{anketa.manufactured_product}}</textarea>
+                                    </div>
+                                    <div class="col-md-12">
+                                      <label for="exampleFormControlTextarea1">Qo'shimcha ma'lumotlar</label>
+                                      <textarea readonly class="form-control" id="exampleFormControlTextarea1" rows="2">{{anketa.additional_Information}}</textarea>
+                                    </div><br><br>
+                                  </div>
+                                  </div>
+                                  </div>
+
+                                
+
+
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <div class="tab-pane" id="fill-tabpanel-2" role="tabpanel" aria-labelledby="fill-tab-2">
+                        <div class="container">
+                            <div class="row">
+                              {% for i in anketa1 %}
+                                                       <div class="col-md-6 mb-3">
+                            <label for="validationDefault02"><h4>Pasport Nusxasi</h4></label>
+                            {% if i.pport_file %}
+                              <a href="{{i.pport_file.url }}" download="{{i.pport_file}}">Yuklab olish<img width="200px" src="{{ i.pport_file.url }}"  alt=""></a>
+                            {% else %}
+                              <p>Pasport nusxasi kelmadi</p>
+                            {% endif %}
+                          </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationDefault02"><h4>Guvohnoma nusxasi</h4></label>
+                            {% if i.guvohnoma_file %}
+                              <a href="{{i.guvohnoma_file.url }}" download="{{i.guvohnoma_file.url }}">Yuklab olish<img width="200px" src="{{i.guvohnoma_file.url }}"  alt=""></a>
+                            {% else %}
+                              <p>Guvoxnoma nusxasi kelmadi</p>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                        <div class="col-md-12 mb-3">
+                            <label for="validationDefault02"><h4>Portifolyia </h4></label>
+                                <div class="row">
+                                  {% for i in anketa_file %}
+                               
+                                  {% if i.file %}
+                                    <div class="col-md-4">
+                                      <a href="{{i.file.url}}" download="{{i.file.url}}">Yuklab olish</a>
+                                        <img style="border-radius: 10px;" width="200px" src="{{i.file.url}}" alt="">
+                              
+                                    </div>
+                                  {% endif %}
+                                  {% endfor %}
+
+                                </div>
+                         </div>
+                            </div>
+                        </div>
+
+                    </div>
+                  </div>
+            </div>
+
+
+      
+    </div>
+</div><br><br>
+
+<div class="container">
+    <div class="row" >
+    <div class="col-md-12">
+        <div class=""   style="margin: auto; text-align: right;" >
+           
+          <form action="" method="post">
+            {% csrf_token %}
+            <button class="btn btn-danger">O'chirish</button>
+
+          </form>
+            
+        
+        </div>
+    </div>
+
+</div>
+<br></div><br><br>
+{% endfor %}
+{% endblock content %}

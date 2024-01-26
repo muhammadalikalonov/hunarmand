@@ -1,0 +1,40 @@
+{% extends 'Hunarmand_Admin/base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+
+
+
+<form action="" method="post">
+<div class="container report-container">
+    <div style="margin: 0 10px;" class="row table-responsive   ">
+        
+            {%  csrf_token %}
+        <div class="report-header">
+            <h1 class="recent-Articles">Anketa O'tish balli</h1>
+        </div>
+
+        
+        <div class="col-md-12" style="margin-top: 18px;">
+            <p>Joriy o'tish bali</p>
+            
+        </div>
+        <div class="col-md-4" >
+        <input type="number" name="ball" class="form-control" value="{{bal}}" >
+        </div>
+        <div class="col-md-3" >
+            <button class="btn btn-primary" type="submit">O'zgartirish</button>
+        </div>
+    
+  
+    </div>
+</div>
+</form>
+
+
+
+
+
+{% endblock content %}

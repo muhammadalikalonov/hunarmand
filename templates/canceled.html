@@ -1,0 +1,213 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}  
+
+
+<section class="service-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section_title text-center type_two">
+                   <br><br><br>
+                    <div class="title_whole">
+                        <h2 class="title"> XALQ AMALIY SAN'ATI USTALARINING BAHOLASH</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!---============spacing==========--->
+        <div class="pd_bottom_40"></div>
+        <!---============spacing==========--->
+ 
+    </div>
+ 
+</section>
+
+
+<div class="pd_bottom_40"></div>
+<div class="pd_bottom_40"></div>
+<div class="pd_bottom_40"></div>
+<div class="container">
+    <div class="row">
+<div class="col-md-12">
+    <ul class="nav nav-fill nav-tabs mb-3" role="tablist" >
+        <li class="nav-item"  role="presentation">
+          <a class="nav-link active" id="fill-tab-0" style="justify-content: center; background-color:#EDF7FE ; justify-content: center;display: flex;"  href="{% url 'kengash' %}" role="tab" aria-controls="fill-tabpanel-0" aria-selected="true"> <img style="border-radius: 10px;"   src="{% static 'assets/images/mail.gif' %}" width="80px" alt="Seriolab" class="logo_default"></a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" id="fill-tab-1" href="{% url 'confirmation' %}"  style="background-color:#EDF7FE ;justify-content: center; justify-content: center;display: flex;"  role="tab" aria-controls="fill-tabpanel-1" aria-selected="false"> <img style="border-radius: 10px;"  src="{% static 'assets/images/user.gif' %}" width="80px" alt="Seriolab" class="logo_default"></a>
+        </li>
+
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" id="fill-tab-2"  style="background-color:#2d947a ;justify-content: center; justify-content: center;display: flex;" href="{% url 'canceled' %}" role="tab" aria-controls="fill-tabpanel-2" aria-selected="false"> <img  style="border-radius: 10px;"  src="{% static 'assets/images/cancel.gif' %}" width="80px" alt="Seriolab" class="logo_default"></a>
+        </li>
+      </ul>
+</div>
+       <div class="col-md-12">
+        <div class="tab-content" id="tab-content">
+            <div class="tab-pane active" id="fill-tabpanel-0" role="tabpanel" aria-labelledby="fill-tab-0">
+        
+                     <div class="container">
+                        <div class="row table-responsive ">
+        
+                            <table id="example" class="table table-striped table-bordered" style="width:100%">
+            
+                                <thead style="background-color: #fff;">
+                                    <tr>
+                                        <th style="background-color: #fff;">ID</th>
+                                        <th style="background-color: #fff;">Ism Familya Sharif</th>
+                                        <th style="background-color: #fff;">Faoliyat turi</th>
+                                        <th style="background-color: #fff;justify-content: center; align-items: center;">Like</th>
+                                        <th style="background-color: #fff;justify-content: center; align-items: center;">Dislike</th>
+                                      
+                                        <th style="background-color: #fff;justify-content: center; align-items: center;"><img src="{% static 'assets/images/checklist.gif' %}" width="60px" alt="Seriolab" class="logo_default"></th>
+                                        
+                                  
+                                    
+                                      
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for i in dislikes %}
+                                    <tr>
+                                        
+                                        <td>{{i.id}}</td>
+                                      <td><a href="{% url 'ariza_detail' i.id %}">{{i.fist_name }}  {{i.sur_name}} {{i.mid_name }}</a></td>
+                                      <td>{{i.job}}</td>
+                                      <td>{{ i.like_number}}</td>
+                                      
+                               
+                                      <td>{{ i.dislike_number}}</td>
+                                      
+                                      <td>
+                                        <form action="{% url 'kengash' %}?id={{i.id}}&like=yes" method="post">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="pID" value="{{i.id}}">
+                                            <button type="submit"><i class="fa fa-check-circle"></i></button>
+                                        </form>
+                                      </td>
+                                   
+                                     
+                              
+                                    </tr>
+                                    {% endfor %}
+                                   
+                                </tbody>
+                     
+                            </table>
+                           
+                            </div>
+                     </div>
+        
+        
+            </div>
+            <div class="tab-pane" id="fill-tabpanel-1" role="tabpanel" aria-labelledby="fill-tab-1">
+              <div class="container">
+                <div class="row">
+
+                    <table id="example" class="table table-striped table-bordered" style="width:100%">
+    
+                        <thead style="background-color: #fff;">
+                            <tr>
+                                <th style="background-color: #fff; ">ID</th>
+                                <th style="background-color: #fff;">Ism Familya Sharif</th>
+                                <th style="background-color: #fff;">Faoliyat turi</th>
+                                <th style="background-color: #fff;justify-content: center; align-items: center;  "><img src="{% static 'assets/images/like.gif' %}" width="60px" alt="Seriolab" class="logo_default"></th>
+                                <th style="background-color: #fff;justify-content: center; align-items: center;"><img src="{% static 'assets/images/thumbs-down.gif' %}" width="60px" alt="Seriolab" class="logo_default"></th>
+                              
+
+                                
+                                <th style="background-color: #fff;justify-content: center; align-items: center;"><img src="{% static 'assets/images/delivery.gif' %}" width="60px" alt="Seriolab" class="logo_default"></th>
+                                
+                              
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            <tr>
+                                {% for i in anketa %}
+                                <td>{{i.id}}</td>
+                              <td><a href="">{{i.fist_name }}  {{i.sur_name}} {{i.mid_name }}</a></td>
+                              <td>{{i.job}}</td>
+                              <td>{{ i.like_number}}</td>
+                              
+                       
+                              <td>{{ i.like_number}}</td>
+                              
+                              <td></td>
+                
+                              {% endfor %}
+                      
+                            </tr>
+                           
+                        </tbody>
+             
+                    </table>
+                   
+                    </div>
+             </div>
+            </div>
+            <div class="tab-pane" id="fill-tabpanel-2" role="tabpanel" aria-labelledby="fill-tab-2">
+              <div class="container">
+                <div class="row">
+
+                    <table id="example" class="table table-striped table-bordered" style="width:100%">
+    
+                        <thead style="background-color: #fff;">
+                            <tr>
+                                <th style="background-color: #fff;">ID</th>
+                                <th style="background-color: #fff;">Ism Familya Sharif</th>
+                                <th style="background-color: #fff;">Faoliyat turi</th>
+                                <th style="background-color: #fff;justify-content: center; align-items: center;"><img src="{% static 'assets/images/like.gif' %}" width="60px" alt="Seriolab" class="logo_default"></th>
+                                <th style="background-color: #fff;justify-content: center; align-items: center;"><img src="{% static 'assets/images/thumbs-down.gif' %}" width="60px" alt="Seriolab" class="logo_default"></th>
+                              
+                                <th style="background-color: #fff;justify-content: center; align-items: center;"><img src="{% static 'assets/images/checklist.gif' %}" width="60px" alt="Seriolab" class="logo_default"></th>
+                                
+                         
+                              
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            <tr>
+                                  <td></td>
+                                <td>{{i.full_name }}  </td>
+                                <td>{{i.job}}</td>
+                                <td>{{ i.fl_address_U}}</td>
+                                
+                    
+                                <td>{{ i.fl_address_U}}</td>
+                                
+                                <td></td>
+                      
+                            </tr>
+                           
+                        </tbody>
+             
+                    </table>
+                   
+                    </div>
+             </div>
+            </div>
+          </div>
+       </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+      {% endblock content %}
+
+
+
+
+
+
+
+

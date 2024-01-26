@@ -1,0 +1,885 @@
+{% extends 'base.html' %}
+{% load static %} 
+{% block content %}
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    
+<link rel="stylesheet" href="{%  static 'assets/css/cropper.css' %}" type='text/css' media='all'>
+<link rel="stylesheet" href="{%  static 'assets/css/croper_image.css' %}" type='text/css' media='all'>
+<section class="service-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section_title text-center type_two">
+                   <br><br><br>
+                    <div class="title_whole">
+                        <h3 class="titlea">O'ZBEKISTON RESPUBLIKASI "HUNARMAND" UYUSHMASI {{listt}} </h3>
+                    </div>
+                    <div class="title_wholAe">
+                        <p  class="titlea">Milliy katalogga ro'yxatdan o'tish</p>
+                        <br><br><br>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+        <form  enctype="multipart/form-data" method="post"  class="was-validated" >
+
+            <div class="container">
+                <div class="row">
+                     {% csrf_token %}
+            
+          
+                    <input type="text"  hidden class="" id="cropimage" name="cropimage" value="">
+                    {% if anketa_image_profile.image_profile %}
+                  <div class="col-md-4 mb-3"  >
+                    
+                      <div class="group">
+                       
+                      <label for="input-file">
+                        
+                        <img src="{{anketa_image_profile.image_profile.url }}" alt="" name="crop-image"  class="crop-image" id="crop-image">
+                        <input type="file" class="form-control-lg" name="input-file" id="input-file" accept=".png,.jpg,.jpeg" >
+                       
+                      </label>
+                      </div>
+                     
+                  </div>
+                  {% else %}
+
+                  <div class="col-md-4 mb-3"  >
+                    
+                    <div class="group">
+                     
+                    <label for="input-file">
+                      
+                      <img src="{%static 'assets/images/user.png' %}" alt="" name="crop-image"  class="crop-image" id="crop-image">
+                      <input type="file" class="form-control-lg" name="input-file" id="input-file" accept=".png,.jpg,.jpeg" >
+                     
+                    </label>
+                    </div>
+                   
+                </div>
+                {% endif %}
+                  
+                  
+
+                  <div class="col-md-8 mb-3" >
+                    <div class="row" >
+                        <div class="col-6">
+                            <label for="validationDefault01">Ism</label>
+                            <input type="text" class="form-control" value="{{anketa.fist_name}}" id="validationDefault01" placeholder="Familya Ism Sharif"  required readonly>
+        
+                        </div>
+                        <div class="col-6">
+                            <label for="validationDefault01">Familya</label>
+                            <input type="text" class="form-control" value="{{anketa.sur_name}}" id="validationDefault01" placeholder="Familya Ism Sharif"  required readonly>
+                            
+                        </div>
+                        <div class="col-6">
+                            <label for="validationDefault01">Sharif</label>
+                            <input type="text" class="form-control" value="{{anketa.mid_name}}" id="validationDefault01" placeholder="Familya Ism Sharif"  required readonly>
+                        </div>
+                        <div class="col-6">
+                            <label for="validationDefault02">Tug'ilgan Kun</label>
+                            {% if anketa.birthday %}
+                            <input  type="date" name="birthday" id="input-field" minlength="9" maxlength="9"  class="form-control form-control-lg"  value="{{anketa.birthday}}"   required>
+                            {% else %}
+                            <input  type="date" id="input-field" minlength="9" maxlength="9"  name="birthday" class="form-control form-control-lg"   id="validationDefault02"  required>
+                           {% endif %}
+                        </div><br>
+                        <div class="col-12">
+                            <label for="validationDefault02">Email**</label>
+                            {% if anketa.email %}
+                            <input type="email" id="input-field" minlength="9" maxlength="9"   class="form-control" value="{{anketa.email}}" name="email"    required>
+                            {% else %}
+                            <input type="email"  id="input-field"   minlength="9" maxlength="90"   class="form-control" name="email"    required>
+                            <div class="invalid-feedback">Emalingizni kiritng</div>
+                            {% endif %}
+                        </div>
+                   
+                    </div>
+                  </div>
+
+                  <div class="col-md-4 mb-3">
+                    <label for="validationDefault02">Millat</label>
+                    {% if anketa.millati %}
+                    <input type="text"  name="millati" class="form-control"  value="{{ anketa.millati }}"  required>
+                    {% else %}
+                    <input type="text" oninput="this.value=this.value.replace(/[^A-Za-z '\s]/g,'');" minlength="3" id="input-field"  name="millati" class="form-control"   required>
+                    <div class="invalid-feedback">Millatingizni kiritng Lotin alifbosida</div>
+                    {% endif %}
+                  </div>
+                  <div class="col-md-4 mb-3">
+                    <label for="validationDefault02">Telfon raqam</label>
+                    {% if anketa.phone %}
+                    <input type="text" oninput="this.value=this.value.replace(/[^0-9-(-)-+ '\s]/g,'');"   minlength="9" maxlength="20" class="form-control"  name="phone" value="{{anketa.phone}}"    required>
+                    {% else %}
+                    <input type="text" class="form-control"  minlength="3" maxlength="14" value="+998 " name="phone"    required>
+                    {% endif %}
+                  </div>
+                  <div class="col-md-4 mb-3">
+                    <label for="validationDefault02">Ma'lumotingiz</label>
+                    <select class="form-select" name="information" aria-label="Default select example">
+             
+                      <option name="information" value="Oliy">Oliy</option>
+                      <option name="information" value="To'liqsiz oliy">To'liqsiz oliy</option>
+                      <option name="information"  value="O'rta maxsus, kasb-hunar">O'rta maxsus, kasb-hunar</option>
+                      <option name="information" value="Ummiy o'rta">Ummiy o'rta</option>
+                      <option name="information" value="To'liqsiz o'rta">To'liqsiz o'rta</option>
+                      <option name="information" value="Ma'lumotsiz">Ma'lumotsiz</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="validationDefault02">Fuqorlik</label>
+                    <select class="form-select" name="ctzn" aria-label="Default select example">
+                   
+                      <option name="ctzn" value="O'zbekiston">O'zbekiston</option>
+                      <option name="ctzn" value="Avg'oniston">Avg'oniston</option>
+                      <option name="ctzn" value="Eron">Eron</option>
+                      <option name="ctzn" value="Ozarbayjon">Ozarbayjon</option>
+                      <option name="ctzn" value="Qirg'iziston">Qirg'iziston</option>
+                      <option name="ctzn" value="Qozog'iston">Qozaeg'iston</option>
+                      <option name="ctzn" value="Rossiya">Rossiya</option>
+                      <option name="ctzn" value="Tojikiston">Tojikiston</option>
+                      <option name="ctzn" value="Turkiya">Turkiya</option>
+                      <option name="ctzn" value="Turkmaniston">Turkmaniston</option>
+                    </select>
+                  </div>
+                  {% if anketa.viloyati %}
+                  <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                    <label for="validationDefault02">Viloyat:</label>
+                    <input type="text" style="text-transform: uppercase;" name="viloyati" class="form-control" id="validationDefault02" readonly value="{{anketa.viloyati}}"   required>
+                  </div>
+                </div>
+                  {% else %}
+                  <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                    <label for="city">Viloyat:</label>
+                    <select id="city" style="text-transform: uppercase;" onchange="populateDistricts()">
+                        <option name="viloyati" value=""></option>
+                        <option name="viloyati"  value="Qoraqalpog‘iston Respublikasi">Qoraqalpog‘iston Respublikasi</option>
+                        <option name="viloyati"  value="Toshkent viloyati">Toshkent viloyati</option>
+                        <option name="viloyati"  value="Toshkent shahr">Toshkent shahri</option>
+                        <option name="viloyati"  value="Farg‘ona viloyati">Farg‘ona viloyati</option>
+                        <option name="viloyati"  value="Sirdaryo viloyati">Sirdaryo viloyati</option>
+                        <option name="viloyati"  value="Surxondaryo viloyati">Surxondaryo viloyati</option>
+                        <option name="viloyati"  value="Samarqand viloyati">Samarqand viloyati</option>
+                        <option name="viloyati"  value="Namangan viloyati">Namangan viloyati</option>
+                        
+                        <option name="viloyati"  value="Andijon_viloyati">Andijon viloyati</option>
+                        <option name="viloyati"  value="Buxoro viloyati">Buxoro viloyati</option>
+                        <option name="viloyati"  value="Jizzax viloyati">Jizzax viloyati</option>
+                        <option name="viloyati"  value="Tashkent">Qashqadaryo viloyati</option>
+                        <option name="viloyati"  value="Navoiy viloyati">Navoiy viloyati</option>
+                     
+                        <!-- Add more cities here -->
+                    </select>
+                 
+                  </div>
+                </div>
+                  {% endif %}
+
+                  {% if anketa.tumani %}
+                  <div class="col-md-6 mb-3">
+                    <label for="validationDefault02">Tuman:</label>
+                    <input type="text" name="tumani" style="text-transform: uppercase;" class="form-control" id="validationDefault02" value="{{anketa.tumani}}" readonly required>
+                  </div>
+                  {% else %}
+                  <div class="col-md-6 mb-3">
+                    <label for="validationDefault02">Tuman:</label>
+                    <input type="text" name="tumani"  style="text-transform: uppercase;" class="form-control" id="validationDefault02" value="{{anketa.tumani}}"   required>
+                  </div>
+                  {% endif %}
+                  {% if anketa.mahalla %}
+                  <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                    <label  for="validationDefault02">Mahala</label>
+                    <input  name="mahalla" oninput="this.value=this.value.replace(/[^A-Za-z\s]/g,'');" minlength="5"  type="text" style="text-transform: uppercase;" class="form-control" id="validationDefault02" value="{{anketa.mahalla}}"   required >
+                  </div>
+                </div>
+                  {% else %}
+                  <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                      <label  for="validationDefault02">Mahala</label>
+                        <input type="text" name="mahalla"  style="text-transform: uppercase;" required="required" data-error="Enter Your Name">
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+          
+                  {% endif %}
+
+                  {% if anketa.yashash_manzili %}
+                  <div class="col-md-12 mb-3">
+                    <label for="validationDefault02">Uy manzili</label>
+                    <input type="text" name="yashash_manzili" class="form-control" id="validationDefault02" value=" {{anketa.yashash_manzili}}"  required >
+                  </div>
+                  {% else %}
+                  <div class="col-md-4 mb-3">
+                    <label for="validationDefault02">Uy manzili</label>
+                    <input type="text" name="yashash_manzili" class="form-control" id="validationDefault02" value=""  required >
+                  </div>
+                  {% endif %}
+
+                  {% if anketa.pport_no %}
+                  
+                  <div class="col-md-4 mb-3">
+                    <label for="validationDefault02">Pasport seryasi</label>
+                    <input type="text" style="text-transform: uppercase;" class="form-control" id="validationDefault02"  value="{{anketa.pport_no}}"  required readonly> 
+                  </div>
+                  {% else %}
+                  <div class="col-md-4 mb-3">
+                    <label for="validationDefault02">Pasport seryasi</label>
+                    <div class="row">
+                        
+                        <div class="col-3"><input style="text-transform: uppercase;" type="text" maxlength="7" class="form-control" id="validationDefault02"   required > </div>
+                        <div class="col-9"><input style="text-transform: uppercase;" type="text" maxlength="7" class="form-control" id="validationDefault02"   required > </div>
+                    </div>
+                  </div>
+                  {% endif %}
+                  <div class="col-md-4 mb-3">
+                    <label for="validationDefault02" >Pasport nusxasi (.png, .pdf, .jpeg, .jpg) </label>
+                    {% if anketa.pport_file %}
+                    <input type="file" name="pport_file" accept=".png, .pdf, .jpeg, .jpg" max="2MB"   value="{{anketa.pport_file}}" class="form-control form-control-lg"     required>
+                    {% else %}
+                    
+                    <input type="file" name="pport_file" accept=".png, .pdf, .jpeg, .jpg" max="2MB" id="file2"   data-maxFileSize="2" data-accepted="image/*"   class="form-control form-control-lg"    required>
+                  
+                    {% endif %}
+                  </div>
+                  {% if anketa.tin %}
+                  <div class="col-md-4 mb-3">
+                    <label for="validationDefault02">STIR</label>
+                    <input type="text"  name="tin" class="form-control" maxlength="9" id="validationDefault02"  value="{{ anketa.tin }}"   required readonly>
+                  </div>
+                  {% else %}
+                  <div class="col-md-4 mb-3">
+                    <label for="validationDefault02">STIR</label>
+                    <input name="tin"  oninput="maxLengthCheck(this)" type = "number" maxlength = "9"  min = "1" max = "999999999" class="form-control" id="validationDefault02"    required >
+                  </div>
+                  {% endif  %}
+                  
+                
+                  {% if anketa.pin %}
+                  <div class="col-md-4 mb-3">
+                    <label for="validationDefault02">JSHSHIR</label>
+                    <input type="text"  class="form-control" id="validationDefault02" value="{{anketa.pin}}"  required readonly> 
+                  </div>
+                  {% else %}
+                  <div class="col-md-4 mb-3">
+                    <label for="validationDefault02">JSHSHIR</label>
+                    <input type="text" class="form-control" id="validationDefault02"   required > 
+                  </div>
+                  {% endif %}
+                  {% if anketa.guvohnoma %}
+                  <div class="col-md-4 mb-3">
+                    <label for="validationDefault02">Guvohnoma raqami</label>
+                    <input type="text" style="text-transform: uppercase;" class="form-control" id="validationDefault02"  value="{{anketa.guvohnoma}}"  readonly required>
+                  </div>
+                  {% else%}
+                  <div class="col-md-4 mb-3">
+                    <label for="validationDefault02">Guvohnoma raqami</label>
+                    <input type="text" style="text-transform: uppercase;" class="form-control" id="validationDefault02"   required>
+                  </div>
+                  {% endif %}
+
+                  <div class="col-md-4 mb-3">
+                    <label for="file">Guvohnoma nusxasi (.png, .pdf, .jpeg, .jpg)  </label>
+                    {% if anketa.guvohnoma_file %}
+                    <input id="file" maxFileSize="2" type="file" value="{{anketa.guvohnoma_file}}" name="guvohnoma" class="form-control form-control-lg"  required>
+                    {% else %}
+                    <input id="file"  maxFileSize="2" type="file" name="guvohnoma" class="form-control form-control-lg"  required>
+                    {% endif %}
+                  </div>
+
+                  {% if anketa.guvohnoma_start_date %}
+                  <div class="col-md-4 mb-3">
+                    <label for="validationDefault02">Ro'yhadan o'tgan sanasi</label>
+                    <input width="100%" type="text" class="form-control" id="validationDefault02" value="{{anketa.guvohnoma_start_date}}" readonly  required>
+                  </div>
+                  {% else %}
+                  <div class="col-md-4 mb-3">
+                    <label for="validationDefault02">Ro'yhadan o'tgan sanasi</label>
+                    <input width="100%" type="date" class="form-control" id="validationDefault02"   required>
+                  </div>
+                  {% endif %}
+                  {% if anketa.guvohnoma_end_date %}
+                  <div class="col-md-4 mb-3">
+                    <label for="validationDefault02">Amal qilish mudati</label>
+                    <input type="text" class="form-control" id="validationDefault02" value="{{anketa.guvohnoma_end_date}}"  readonly  required>
+                  </div>
+                  {% else %}
+                  <div class="col-md-4 mb-3">
+                    <label for="validationDefault02">Amal qilish mudati</label>
+                    <input type="date" class="form-control" id="validationDefault02"   required>
+                  </div>
+                  {% endif %}
+                  <div class="col-md-4 mb-3">
+                    <label for="validationDefault02">Uyushmaga A'zo bo'lgan yili</label>
+                    {% if anketa.memberyear %}
+                    <input type="text" name="memberyear" value="{{ anketa.memberyear }}" class="form-control" id="DeleteRow" readonly  required>
+                    {% else %}
+                    <input type="text" name="memberyear" class="form-control" id="DeleteRow"   required>
+                    {% endif %}
+                  </div> 
+                  {% if anketa.job %}
+                  <div class="col-md-12 mb-3">
+                    <label for="validationDefault02">Faoliyat Turi</label>
+                    <input type="text" style="text-transform: uppercase;" name="job" class="form-control form-control-lg" value="{{anketa.job}}" id="validationDefault02" readonly   required>
+                  </div>
+                  {% else %}
+                  <div class="col-md-8 mb-3">
+                    <label for="validationDefault02">Faoliyat Turi</label>
+                    <select name="job" class="form-select" aria-label="Default select example">
+                      <option name="job" value="Bosh kiyimlar tayyorlash">Bosh kiyimlar tayyorlash</option>
+                      <option name="job" value="Charm mahsulotlari">Charm mahsulotlari</option>
+                      <option name="job" value="Chinni, fayans va sopol buyumlari">Chinni, fayans va sopol buyumlari</option>
+                      <option name="job" value="Emallash ishlari">Emallash ishlari</option>
+                      <option name="job" value="Esdalik buyumlari">Esdalik buyumlari</option>
+                      <option name="job" value="Ganch o'ymakorligi">Ganch o'ymakorligi</option>
+                      <option name="job" value="Gul bosilgan gazlamalar va chokli buyumlar">Gul bosilgan gazlamalar va chokli buyumlar</option>
+                      <option name="job" value="Kandakorlik, misgarlik buyumlari">Kandakorlik, misgarlik buyumlari</option>
+                      <option name="job" value="Kashtachilik">Kashtachilik</option>
+                      <option name="job" value="Ko'zgu tayyorlash">Ko'zgu tayyorlash</option>
+                      <option name="job" value="Mayda haykaltaroshlik buyumlari">Mayda haykaltaroshlik buyumlari</option>
+                      <option name="job" value="Metalldan yasalgan buyumlar">Metalldan yasalgan buyumlar</option>
+
+                      <option name="job" value="Milliy liboslar tayyorlash">Milliy liboslar tayyorlash</option>
+                      <option name="job" value="Milliy poyabzal tayyorlash">Milliy poyabzal tayyorlash</option>
+                      <option name="job" value="Miniatyura, rang tasvir, naqqoshlik va bo'yoqli naqshlar">Miniatyura, rang tasvir, naqqoshlik va bo'yoqli naqshlar</option>
+                      <option name="job" value="Mozaika ishlari">Mozaika ishlari</option>
+                      <option name="job" value="Mualliflik mebellarini tayyorlash">Mualliflik mebellarini tayyorlash</option>
+                      <option name="job" value="Musiqa asboblari">Musiqa asboblari</option>
+                      <option name="job" value="Novdalardan buyumlar to'qish">Novdalardan buyumlar to'qish</option>
+                      <option name="job" value="O'yinchoqlar">O'yinchoqlar</option>
+                      <option name="job" value="Oddiy metalldan milliy uslubda tayyorlangan taqinchoqlar">Oddiy metalldan milliy uslubda tayyorlangan taqinchoqlar</option>
+                      <option name="job" value="Pechka va kaminlar yasash">Pechka va kaminlar yasash</option>
+                      <option name="job" value="Qimmatbaho metalldan yasalgan zargarlik buyumlari">Qimmatbaho metalldan yasalgan zargarlik buyumlari</option>
+                      <option name="job" value="Qo'lda gazlamalar to'qish">Qo'lda gazlamalar to'qish</option>
+                      <option name="job" value="Qo'lda gilam to'qish">Qo'lda gilam to'qish</option>
+                      <option name="job" value="Shisha puflash ishlari">Shisha puflash ishlari</option>
+                      <option name="job" value="Soatsozlik">Soatsozlik</option>
+                      <option name="job" value="Suyakka o'yma naqsh solish">Suyakka o'yma naqsh solish</option>
+                      <option name="job" value="Tosh o'ymakorligi">Tosh o'ymakorligi</option>
+                      <option name="job" value="Tunukadan yasalgan buyumlar">Tunukadan yasalgan buyumlar</option>
+                      <option name="job" value="Yog'och o'ymakorligi">Yog'och o'ymakorligi</option>
+                      <option name="job" value="Yog'ochdan tayyorlangan xalq hunarmandchiligi mahsulotlari">Yog'ochdan tayyorlangan xalq hunarmandchiligi mahsulotlari</option>
+                      <option name="job" value="Zardo'zlik buyumlari">Zardo'zlik buyumlari</option>
+                      <option name="job" value="Hajmli va shaklli qoliplarda quyilgan buyumla">Hajmli va shaklli qoliplarda quyilgan buyumlar</option></select>
+                  </div>
+                  {% endif %}
+                  <div class="col-md-6 mb-3">
+                    <label for="city">Faoliyat viloyati:</label>
+                    {% if anketa.fl_address_V %}
+                    <input type="text" style="text-transform: uppercase;" name="viloyati" class="form-control" id="validationDefault02" value="{{anketa.viloyati}}"   required>
+                 
+                    {% else  %}
+
+                    <select id="city" onchange="populateDistricts()">
+                      <option name="fl_address_V" value=""></option>
+                      <option name="fl_address_V"  value="Qoraqalpog‘iston Respublikasit">Qoraqalpog‘iston Respublikasi</option>
+                      <option name="fl_address_V"  value="Tashkent viloyati">Toshkent viloyati</option>
+                      <option name="fl_address_V"  value="Tashkent">Toshkent shahri</option>
+                      <option name="fl_address_V"  value="Farg‘ona viloyati">Farg‘ona viloyati</option>
+                      <option name="fl_address_V"  value="Sirdaryo viloyati">Sirdaryo viloyati</option>
+                      <option name="fl_address_V"  value="Surxondaryo viloyati">Surxondaryo viloyati</option>
+                      <option name="fl_address_V"  value="Samarqand viloyati">Samarqand viloyati</option>
+                      <option name="fl_address_V"  value="Namangan viloyati">Namangan viloyati</option>
+                      
+                      <option name="fl_address_V"  value="Andijon viloyati">Andijon viloyati</option>
+                      <option name="fl_address_V"  value="Buxoro viloyati">Buxoro viloyati</option>
+                      <option name="fl_address_V"  value="Jizzax viloyati">Jizzax viloyati</option>
+                      <option name="fl_address_V"  value="Tashkent">Qashqadaryo viloyati</option>
+                      <option name="fl_address_V"  value="Navoiy viloyati">Navoiy viloyati</option>
+                   
+                      <!-- Add more cities here -->
+                      </select>
+                  {% endif %}
+                  </div>
+
+                  <div class="col-md-6 mb-3">
+                    <label for="district">Faoliyat Tuman</label>
+                    {% if anketa.fl_address_T %}
+                   
+                    
+                      <input type="text" style="text-transform: uppercase;" name="fl_address_T" class="form-control" id="validationDefault02" value="{{anketa.tumani}}"   required>
+                    {% else %}
+                      <input type="text" style="text-transform: uppercase;" name="fl_address_T" class="form-control" id="validationDefault02"    required>
+                
+                    {% endif %}
+                 
+                  </div>
+
+
+                  
+                  <div class="col-md-12 mb-3">
+                    <label for="validationDefault02">Faoliyat Uy manzili</label>
+                    {% if  anketa.fl_address_U %}
+                    <input type="text" style="text-transform: uppercase;" name="fl_address_U" class="form-control" id="validationDefault02" value="{{anketa.fl_address_U}}"  required>
+                    {% else %}
+                    <input type="text" style="text-transform: uppercase;" name="fl_address_U" class="form-control" id="validationDefault02"   required>
+                    {% endif %}
+                  </div>
+
+                  <div class="col-md-4 mb-3">
+                  <label for="validationDefault02">Quydagi qaysi biriga egasiz</label>
+                  <select class="form-select" name="girft" aria-label="Default select example" required>
+                      
+                      <option value="Tavsiyanoma">Tavsiyanoma</option>
+                      <option value="Xalq ustasi">Xalq ustasi</option>
+                      <option value="Xalqaro ko‘rgazma, ko‘rik tanlov, festival g‘olibi yoki laurеati">Xalqaro ko‘rgazma, ko‘rik tanlov, festival g‘olibi yoki laurеati</option>
+                  
+                  </select>
+                  </div>
+                  <div class="col-md-4">
+                    <label for="validationDefault02">Veb Sayt </label>
+                    {% if anketa.web_site %}
+                    <input type="url" name="web_site" class="form-control" id="validationDefault02"  value="{{anketa.web_site}}"  >
+                    {% else %}
+                    <input type="url" name="web_site" class="form-control" id="validationDefault02"   >
+                    {% endif %}
+                  </div>
+                  <div class="col-md-4">
+                    <label for="validationDefault02">O'quvchilar Soni</label>
+                    {% if  anketa.number_of_students %} 
+                    <input type="number" name="number_of_students" class="form-control" id="validationDefault02"  value="{{anketa.number_of_students }}"  required>
+                    {% else %}
+                    <input type="number" name="number_of_students" class="form-control" id="validationDefault02"   required>
+                    {% endif %}
+                  </div>
+
+                  <div class="col-md-12">
+                    <label for="exampleFormControlTextarea1">Davlat Mukofati(Batafsil)</label>
+                    {% if anketa.state_award %}
+                    <textarea name="state_award" class="form-control is-invalid" oninput="this.value=this.value.replace(/[^A-Za-z,. , ' ! @ # $ % *(){}[]\s]/g,'');" minlength="3" id="exampleFormControlTextarea1" rows="2">{{anketa.state_award}}</textarea>
+                    {% else %}
+                    <textarea name="state_award" oninput="this.value=this.value.replace(/[^A-Za-z,. , ' ! @ # $ % *(){}[]\s]/g,'');" minlength="3"  class="form-control is-invalid" id="exampleFormControlTextarea1" rows="2"></textarea>
+                    {% endif %}
+                  </div><br><br>
+                  <div class="col-md-12">
+                    <label for="exampleFormControlTextarea1">Yurtimizda o'tkazilgan tadbirlar(Batafsil)</label>
+                    {% if anketa.yurtmizda_tadbir %}
+                    <textarea name="yurtmizda_tadbir" oninput="this.value=this.value.replace(/[^A-Za-z,. , ' ! @ # $ % *(){}[]\s]/g,'');" minlength="3"  class="form-control is-invalid"  id="exampleFormControlTextarea1">{{anketa.yurtmizda_tadbir}}</textarea>
+                    {% else %}
+                    <textarea  name="yurtmizda_tadbir" oninput="this.value=this.value.replace(/[^A-Za-z,. , ' ! @ # $ % *(){}[]\s]/g,'');" minlength="3"  class="form-control is-invalid" id="exampleFormControlTextarea1" rows="2"></textarea>
+                    {% endif %}
+                  </div>
+
+                  <div class="col-md-12">
+                    <label for="exampleFormControlTextarea1">Xorijiy o'tkazilgan tadbirlar(Batafsil)</label>
+                    {% if anketa.xorjiy_tadbir %}
+                    <textarea name="xorjiy_tadbir" oninput="this.value=this.value.replace(/[^A-Za-z,. , ' ! @ # $ % *(){}[]\s]/g,'');" minlength="3"  class="form-control is-invalid"  id="exampleFormControlTextarea1">{{anketa.xorjiy_tadbir}}</textarea>
+                    {% else %}
+                    <textarea name="xorjiy_tadbir" oninput="this.value=this.value.replace(/[^A-Za-z,. , ' ! @ # $ % *(){}[]\s]/g,'');" minlength="3"  class="form-control is-invalid" id="exampleFormControlTextarea1" rows="2"></textarea>
+                    {% endif %}
+                  </div>
+                  <div class="col-md-12">
+                    
+                    <label for="exampleFormControlTextarea1">Shaxsiy ko'rgazmalar(Batafsil)</label>
+                    {% if anketa.personal_event %}
+                    <textarea  name="personal_event" oninput="this.value=this.value.replace(/[^A-Za-z,. , ' ! @ # $ % *(){}[]\s]/g,'');" minlength="3"   class="form-control is-invalid" id="exampleFormControlTextarea1" rows="2">{{anketa.personal_event}}</textarea>
+                    {% else %}
+                    <textarea name="personal_event" oninput="this.value=this.value.replace(/[^A-Za-z,. , ' ! @ # $ % *(){}[]\s]/g,'');" minlength="3"  class="form-control is-invalid" id="exampleFormControlTextarea1" rows="2"></textarea>
+                    {% endif %}
+                  </div>
+                  <div class="col-md-12">
+                    <label for="exampleFormControlTextarea1">Ijodingizni o'ziga hosligi</label>
+                    {% if anketa.creativity %}
+                    <textarea name="creativity" oninput="this.value=this.value.replace(/[^A-Za-z,. , ' ! @ # $ % *(){}[]\s]/g,'');" minlength="3"  class="form-control is-invalid" id="exampleFormControlTextarea1" rows="2">{{anketa.creativity}}</textarea>
+                    {% else %}
+                    <textarea name="creativity" oninput="this.value=this.value.replace(/[^A-Za-z,. , ' ! @ # $ % *(){}[]\s]/g,'');" minlength="3"  class="form-control is-invalid" id="exampleFormControlTextarea1" rows="2"></textarea>
+                    {% endif %}
+
+                  </div>
+                  <div class="col-md-12">
+                    <label for="exampleFormControlTextarea1">Ishlab chiqargan mahsulot turlari va nomlari </label>
+                    {% if anketa.manufactured_product %}
+                    <textarea name="manufactured_product" oninput="this.value=this.value.replace(/[^A-Za-z,. , ' ! @ # $ % *(){}[]\s]/g,'');" minlength="3"  class="form-control is-invalid" id="exampleFormControlTextarea1" rows="2">{{anketa.manufactured_product}}</textarea>
+                    {% else %}
+                    <textarea name="manufactured_product" oninput="this.value=this.value.replace(/[^A-Za-z,. , ' ! @ # $ % *(){}[]\s]/g,'');" minlength="3"  class="form-control is-invalid" id="exampleFormControlTextarea1" rows="2"></textarea>
+                    {% endif %}
+                  </div>
+              
+                  <div class="col-md-12">
+                    <label for="exampleFormControlTextarea1">Qo'shimcha ma'lumotlar</label>
+                            {% if anketa.additional_Information %}
+                            <textarea name="additional_Information" oninput="this.value=this.value.replace(/[^A-Za-z,. , ' ! @ # $ % *(){}[]\s]/g,'');" minlength="3"  class="form-control is-invalid" id="exampleFormControlTextarea1" rows="2">{{anketa.additional_Information}}</textarea>
+                            {% else %}
+                            <textarea name="additional_Information" oninput="this.value=this.value.replace(/[^A-Za-z,. , ' ! @ # $ % *(){}[]\s]/g,'');" minlength="3"  class="form-control is-invalid" id="exampleFormControlTextarea1" rows="2"></textarea>
+                            {% endif %}
+                  </div>
+                  <label for="exampleFormControlTextarea1">Qo'shimcha Fayl va rasmlar yuklash</label>
+
+                {% if anketa_file %}
+               {% for i in anketa_file %}
+  <div class="file-container col-md-2" data-file-id="{{ i.id }}">
+    {% if i.file.url|slice:"-4:" == ".doc" or i.file.url|slice:"-5:" == ".docx" %}
+      <a href="{{i.file.url}}" download="{{i.file.url}}">
+        <img width="100" height="100" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/.docx_icon.svg/240px-.docx_icon.svg.png" alt="">
+      </a>
+    {% elif i.file.url|slice:"-4:" == ".jpg" %}
+      <a href="{{i.file.url}}" download="{{i.file.url}}">
+        <img style="border-radius: 10px;" width="200px" src="{{i.file.url}}" alt="">
+      </a>
+    {% elif i.file.url|slice:"-4:" == ".pdf" %}
+      <a href="{{i.file.url}}" download="{{i.file.url}}">
+        <img width="100" height="100" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/PDF_file_icon.svg/400px-PDF_file_icon.svg.png" alt="">
+      </a>
+    {% else %}
+      <a href="{{i.file.url}}" download="{{i.file.url}}">
+        <img style="border-radius: 100px;" width="100px" src="https://upload.wikimedia.org/wikipedia/commons/9/97/Document_icon_%28the_Noun_Project_27904%29.svg" alt="">
+      </a>
+    {% endif %}
+    
+    <!-- Add delete button -->
+    <button onclick="deleteFile({{ i.id }}, event)">Delete</button>
+  </div>
+{% endfor %}
+
+
+
+
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <p></p>
+                  <div class="col-md-12 dropzone"  id="my_dropzone" style="border: 3px dotted; border-radius: 15px; margin-bottom: 20px; box-shadow: 2px 2px 10px #fff;"> 
+                    
+                    <div class="fallback">
+                        <input type="file" name="file" value="{{anketa.anketa_file}}"  id="" multiple onchange="handle(this.files)">
+                    </div>
+                  </div>
+                
+                {% else %}
+                  <div class="col-md-12 dropzone"  id="my_dropzone" style="border: 3px dotted; border-radius: 15px; margin-bottom: 20px; box-shadow: 2px 2px 10px #fff;"> 
+
+                    <div class="fallback">
+                        <input type="file" name="file" value="{{anketa.anketa_file}}"  id="" multiple onchange="handle(this.files)">
+                    </div>
+                  </div>
+                {% endif %}
+       
+                <div> <button  class="btn btn-primary" type="submit">Tekshirish</button></div>
+                 
+
+                  <div class="col-md-12">
+                      <div class="modal">
+                          <div class="modal-content">
+                              <div class="modal-header">
+                                  <p>Rasmni Qirqish</p>
+                              </div>
+                              <div class="modal-body">
+                                  <div class="content-imagen-cropper">
+                                      <img src="" alt="" class="img-cropper" id="img-cropper">
+                                  </div>
+                                  <div class="content-imagen-sample">
+                                      <div src="" alt="" class="img-sample" id="img-croppered"></div>
+                                  </div>
+                              </div>
+                              <div class="modal-footer">
+                                  <button class="btn primary" type="button" id="cut">Qirqish</button>
+                                  <button class="btn secundary" style="background-color: rgb(228, 85, 85);" type="button" id="close">O'chirish</button>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                </div>
+            </div>   
+        </form>
+        
+        
+
+                    
+          
+        <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+        <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+
+        <script type='text/javascript' src="{% static 'assets/js/cropper.js' %}"></script>
+        <script type='text/javascript' src="{% static 'assets/js/cropper_jquery.js' %}"></script>
+<script>
+function deleteFile(fileId, event) {
+  // Prevent default form submission behavior
+  event.preventDefault();
+
+  // Send an AJAX request to delete_anketa_file view
+  $.ajax({
+    url: `/delete_anketa_file/${fileId}`,
+    type: 'POST',
+    data: {
+      csrfmiddlewaretoken: '{{ csrf_token }}',
+    },
+    success: function(response) {
+      // Handle success, hide the parent container of the deleted file
+      if (response.message === 'Image deleted successfully.') {
+        $(`.file-container[data-file-id="${fileId}"]`).hide();
+      } else {
+        alert('Error deleting file.');
+      }
+    },
+    error: function() {
+      alert('Error deleting file. Please try again.');
+    }
+  });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+let cropper = null;
+console.log("salom")
+$('#input-file').on('change', () => {
+    let image = document.getElementById('img-cropper')
+    let input = document.getElementById('input-file')
+
+    let archivos = input.files
+    let extensiones = input.value.substring(input.value.lastIndexOf('.'), input.value.lenght)
+    
+
+    if(!archivos || !archivos.length){        
+        image.src = "";
+        input.value = "";
+        
+    } else if(input.getAttribute('accept').split(',').indexOf(extensiones) < 0){
+         alert('Debes seleccionar una imagen')
+         input.value = "";
+
+    } else {
+        let imagenUrl = URL.createObjectURL(archivos[0])
+        image.src = imagenUrl
+
+        cropper = new Cropper(image, {
+            aspectRatio: 1, // es la proporción en la que queremos que recorte en este caso 1:1
+            preview: '.img-sample', // contenedor donde se va a ir viendo en tiempo real la imagen cortada
+            zoomable: false, //Para que no haga zoom 
+            viewMode: 1, //Para que no estire la imagen al contenedor
+            responsive: false, //Para que no reacomode con zoom la imagen al contenedor
+            dragMode: 'none', //Para que al arrastrar no haga nada
+            ready(){ // metodo cuando cropper ya este activo, le ponemos el alto y el ancho del contenedor de cropper al 100%
+                document.querySelector('.cropper-container').style.width = '100%'
+                document.querySelector('.cropper-container').style.height = '100%'
+            }
+        })
+
+        $('.modal').addClass('active')
+        $('.modal-content').addClass('active')
+
+        $('.modal').removeClass('remove')
+        $('.modal-content').removeClass('remove')
+    }
+})
+
+$('#close').on('click', () => {
+    let image = document.getElementById('img-cropper')
+    let input = document.getElementById('input-file')
+
+    image.src = "";
+    input.value = "";
+
+    cropper.destroy()
+
+    $('.modal').addClass('remove')
+    $('.modal-content').addClass('remove')
+
+    $('.modal').removeClass('active')
+    $('.modal-content').removeClass('active')
+})
+
+$('#cut').on('click', () => {
+  let crop_image = document.getElementById('crop-image');
+    let img_url = document.getElementById('cropimage');
+    let canvas = cropper.getCroppedCanvas();
+    let image = document.getElementById('img-cropper');
+    let input = document.getElementById('input-file');
+    let formData = new FormData();
+
+    canvas.toBlob(function(blob) {
+        let url_cut = URL.createObjectURL(blob);
+        crop_image.src = url_cut;
+        crop_image.alt = url_cut;
+        cropimage.value = url_cut;
+        formData.append('cropimage', blob, 'crop.png');
+
+        $.ajax({
+            url: '/anketa_image_profile/{{anketa.id}}/',
+            method: 'POST',
+    
+            data: formData,
+            enctype: 'multipart/form-data',
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                // Handle the success response
+            },
+            error: function(xhr, status, error) {
+                // Handle the error response
+            }
+        });
+
+        
+    })
+    
+
+    
+    image.src = "";
+    
+    input.value = "";
+
+
+    cropper.destroy()
+
+    $('.modal').addClass('remove')
+    $('.modal-content').addClass('remove')
+
+    $('.modal').removeClass('active')
+    $('.modal-content').removeClass('active')
+})
+// $('#cut').on('click', () => {
+//     let crop_image = document.getElementById('crop-image');
+//     let canvas = cropper.getCroppedCanvas();
+
+//     canvas.toBlob(function(blob) {
+//         let formData = new FormData();
+//         formData.append('image', blob, 'cropped_image.jpg');
+//         console.log(formData.append('image', blob, 'cropped_image.jpg'))
+//         // Send the image file to the server using AJAX
+//         $.ajax({
+//             url: '/online/255/',
+//             method: 'POST',
+//             data: formData,
+//             processData: false,
+//             contentType: false,
+//             success: function(response) {
+//                 // Handle the success response
+//             },
+//             error: function(xhr, status, error) {
+//                 // Handle the error response
+//             }
+//         });
+//     });
+// });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+        Dropzone.autoDiscover = false;
+            
+            const myDropzone = new Dropzone("#my_dropzone", {
+              url: '/anketa_file/{{anketa.id}}/',
+              maxFiles: 10,
+              maxFilesize: 2,
+            
+              init: function() {
+              this.on("success", function(file, response) {
+                localStorage.setItem
+                file.id = response.file_id;
+                console.log(file.id) // Store the file ID returned from the server
+                
+                // Add a custom delete button to each uploaded file
+                var deleteButton = Dropzone.createElement('<button style="background-color: red; border-radius: 2px;" class="dz-delete-btn"><i class="fa fa-times" aria-hidden="true"></i></button>');
+                var _this = this;
+
+                deleteButton.addEventListener("click", function(e) {
+                  e.preventDefault();
+                  e.stopPropagation();
+
+                  // Get the file ID
+                  var fileId = file.id;
+                  console.log(fileId)
+                  // Send an AJAX request to delete the image
+
+                  var url = "http://31.129.104.246/delete_anketa_file/"
+                  
+                  
+                  var xhr = new XMLHttpRequest();
+                  xhr.open("POST", url+ fileId, true);
+                  xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+                  
+                  
+
+                  xhr.onload = function() {
+                    if (xhr.status === 200) {
+                      // Remove the file from Dropzone
+                      _this.removeFile(file);
+                    }
+                  };
+
+                  xhr.send(JSON.stringify({ file_id: fileId }));
+                  console.log(fileId)
+
+                });
+
+                file.previewElement.appendChild(deleteButton);
+              });
+            }
+            });
+      
+            
+</script>
+
+
+
+
+
+
+
+
+
+
+{% endblock content %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}  
+
+
+
+
+            <section class="service-section">
+                <div class="container">
+                    <div class="row">
+                        
+                        <div class="col-lg-4"></div>
+                        <div class="col-lg-4">
+                            <div class="section_title text-center type_two">
+                               <h2 class="title"> SERTIFIKAT</h2>
+                               <br>
+                                <div>
+                                   
+                                    <img src="{% static 'sertifikat/'|add:ids|add:'.jpg' %}" width="100%" alt="">
+
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="col-lg-4"></div>
+                        <div class="col-lg-12" style="text-align: right;">
+                            <a href="{% static 'sertifikat/'|add:ids|add:'.pdf' %}"  class="theme_btn"   download="certificate.pdf">
+                                Yuklab Olish
+               
+                             </a>
+                        </div>
+                    </div>
+                    </div>
+                    <!---============spacing==========--->
+                    <div class="pd_bottom_40"></div>
+                    <!---============spacing==========--->
+                 
+                </div>
+                <!---============spacing==========--->
+                <div class="pd_bottom_80"></div>
+                <!---============spacing==========--->
+            </section>
+
+            <!-- Button trigger modal -->
+
+
+         
+
+
+      {% endblock content %}

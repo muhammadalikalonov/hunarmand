@@ -1,0 +1,43 @@
+{% extends 'Hunarmand_Admin/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container report-container">     
+<div class="container">
+  <form action="" method="post">
+    {% csrf_token %}
+    <div class="col-12" style="align-items: center;justify-content: center;">
+       
+        <br>
+        {% for i in anketa %}
+        <input style="text-align: center;" type="text" class="form-control" value="{{i.fist_name}} {{i.sur_name}}" id="validationDefault01"   required readonly>
+       
+       <br>
+      
+       <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckIndeterminate">
+        <label class="form-check-label" for="flexCheckIndeterminate">
+            Arxiv
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckIndeterminate">
+        <label class="form-check-label" for="flexCheckIndeterminate">
+            Tizimdan O'chirish
+        </label>
+      </div>
+        {% endfor  %}
+    </div>
+    <div class="col-12" style="margin-bottom: 100px;"></div>
+
+    <div class="col-md-12" style="text-align: right; margin-right:20px ;">
+        <button class="btn btn-primary" type="submit">Saqlash</button>
+    </div>
+
+</form>
+</div>
+
+
+</div>
+
+{% endblock content %}

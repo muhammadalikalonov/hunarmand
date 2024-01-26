@@ -1,0 +1,122 @@
+{% extends 'Hunarmand_Admin/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+<div class="container report-container">     
+    <div class="container">
+        <div class="row ">
+<h2 style="text-align: center;margin: 10px;">Ro'yhatdan o'tkazish</h2>
+{% if message %}
+<h6 style="text-align: center; color: red;">{{message}}</h6>
+{% endif %}
+        <form method="post">
+            {% csrf_token %}
+            <div class="container">
+                <div class="row ">
+                    <div class="col-md-12">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Username</label>
+                                        <input required type="text" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                        </div>
+                                </div>
+                        
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Parol</label>
+                                        <input required type="password" name="password1" class="form-control" id="exampleInputPassword1">
+                                        </div>
+                                </div>
+                            
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Parol Takrorlang</label>
+                                        <input required type="password" name="password2" class="form-control" id="exampleInputPassword1">
+                                        </div>
+                                </div>
+                            
+                        
+
+                                
+                            </div>
+                        </div>
+
+                </div>
+                <div class="col-md-12">
+                    <div class="container">
+                        <div class="row ">
+                    <div class="col-md-12" style="display: flex; ">
+      
+                        <div class="form-check" style="margin-right: 10px; ">
+                            <input class="form-check-input" name="status" type="radio"  id="exampleRadios1" value="Admin" >
+                            <label class="form-check-label" for="exampleRadios1">
+                             Admin
+                            </label>
+                          </div>
+                          <div class="form-check" style="margin-right: 10px; ">
+                            <input class="form-check-input" name="status" type="radio"  id="exampleRadios2" value="Hakam" checked>
+                            <label class="form-check-label" for="exampleRadios2">
+                                Hakam
+                            </label>
+                          </div>
+                          <div class="form-check" style="margin-right: 10px; ">
+                            <input class="form-check-input" name="status"  type="radio"  id="exampleRadios3" value="Menejer" >
+                            <label class="form-check-label" for="exampleRadios3">
+                                Menejer 
+                            </label>
+                          </div>
+                  </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12" style="text-align: right;">
+                    <button type="submit"  class="btn btn-primary">Saqlash</button>
+                </div>
+            </div>
+            </div>
+        
+            
+        </form>
+        </div>
+    </div>
+  </div>
+  <div class="container report-container"> 
+    <h2 style="text-align: center;">Ro'yhat</h2>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Username</th>
+            <th scope="col">Status</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+            {% for i in users %}
+          <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td><a href="{% url 'change_user_password' i.id %}">{{ i.username }}</a></td>
+            {% if i.status %}
+            <td>{{ i.status }}</td>
+            {% else %}
+
+            <td>Admin</td>
+            {% endif %}
+ 
+          {% endfor %}
+     
+        </tbody>
+      </table>
+  </div>
+
+ 
+
+
+
+
+
+{% endblock content %}

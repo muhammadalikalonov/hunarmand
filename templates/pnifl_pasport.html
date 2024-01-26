@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}  
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+       <div class="col-md-6">
+        <form method="post">
+            {% csrf_token %}
+            <h3 style="text-align: center;">Tizimga kirish</h3>
+            <div class="form-outline mb-4">
+                <label class="form-label"  for="form2Example1">Username</label>
+              <input type="text" name="username" id="form2Example1" class="form-control" />
+              
+            </div>
+          
+            <!-- Password input -->
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form2Example2">Parol</label>
+              <input type="password" name="password"  id="form2Example2" class="form-control" />
+              
+            </div>
+          
+            <!-- 2 column grid layout for inline styling -->
+            <div class="row mb-4">
+        
+          
+              <div class="col">
+                <!-- Simple link -->
+              {{message}}
+              </div>
+            </div>
+          
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-primary btn-block mb-4">Tizimga kirish</button>
+          
+            <!-- Register buttons -->
+           
+          </form>
+       </div>
+       <div class="col-md-3"></div>
+    </div>
+</div>
+
+{% endblock content %}

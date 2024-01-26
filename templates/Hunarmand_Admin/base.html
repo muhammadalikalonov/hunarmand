@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible"
+          content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width,
+                   initial-scale=1.0">
+    <title>Hunarmandlar Uyushmasi Admin Panel</title>
+    <link rel="stylesheet"
+          href="{% static 'hunarmand_admin/inde.css' %}">
+    <link rel="stylesheet"
+          href="{% static 'hunarmand_admin/responsive.css' %}">
+          <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+          <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+ 
+<body style="background-color: #cad7fda4;">
+   
+    <!-- for header part -->
+    <header>
+ 
+        <div class="logosec">
+            <img src=
+            "https://media.geeksforgeeks.org/wp-content/uploads/20221210182541/Untitled-design-(30).png"
+            class="icn menuicn"
+            id="menuicn"
+            alt="menu-icon">
+            <div class="logo">Hunarmandlar Uyushmasi Admin Panel</div>
+        </div>
+ 
+        <div class="searchbar">
+            <input type="text"
+                   placeholder="Search">
+            <div class="searchbtn">
+              <img src=
+"https://media.geeksforgeeks.org/wp-content/uploads/20221210180758/Untitled-design-(28).png"
+                    class="icn srchicn"
+                    alt="search-icon">
+              </div>
+        </div>
+ 
+        <div class="message">
+            <div class="circle"></div>
+            <img src=
+"https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/8.png"
+                 class="icn"
+                 alt="">
+            <div class="dp">
+              <img src=
+"https://media.geeksforgeeks.org/wp-content/uploads/20221210180014/profile-removebg-preview.png"
+                    class="dpicn"
+                    alt="dp">
+              </div>
+        </div>
+ 
+    </header>
+ 
+ 
+    <div class="main-container">
+        <div class="navcontainer" >
+
+
+            <nav class="nav" style="margin-right: 60px;">
+                <div class="nav-upper-options">
+                    <a href="{% url 'kelgan_ariza' %}" style="text-decoration: none;">
+                        <div class="nav-option option1">
+                            <img src=
+    "https://media.geeksforgeeks.org/wp-content/uploads/20221210182148/Untitled-design-(29).png"
+                                class="nav-img"
+                                alt="dashboard">
+                            <h3> Bosh sahifa</h3>
+                        </div>
+                    </a>
+            
+                    <a href="{% url 'all_anketa' %}" style="text-decoration: none;">
+                    <div class="option2 nav-option">
+                        <img src=
+"https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/9.png"
+                            class="nav-img"
+                            alt="articles">
+                        <h3>Barcha Anketalar</h3>
+                    </div>
+                </a>
+               <a href="{% url 'Register' %}" style="text-decoration: none;">
+                <div class="nav-option option3">
+                    <img src=
+"https://media.geeksforgeeks.org/wp-content/uploads/20221210183320/5.png"
+                        class="nav-img"
+                        alt="report">
+                    <h3>Hakamlar</h3>
+                </div>
+               </a>
+ 
+                <a href="{% url 'ball' %}" style="text-decoration: none;">
+                    <div class="nav-option option4">
+                        <img src=
+"https://media.geeksforgeeks.org/wp-content/uploads/20221210183321/6.png"
+                            class="nav-img"
+                            alt="institution">
+                        <h3>O'tish balli</h3>
+                    </div>
+                </a>
+
+ 
+                   <a href="{% url  'logout' %}" style="text-decoration: none;">
+                    <div class="nav-option logout">
+                        <img src=
+"https://media.geeksforgeeks.org/wp-content/uploads/20221210183321/7.png"
+                            class="nav-img"
+                            alt="logout">
+                        <h3>Chiqish</h3>
+                    </div>
+                   </a>
+ 
+                </div>
+            </nav>
+        </div>
+        <div class="main">
+ 
+            <div class="searchbar2">
+                <input type="text"
+                       name=""
+                       id=""
+                       placeholder="Search">
+                <div class="searchbtn">
+                  <img src=
+"https://media.geeksforgeeks.org/wp-content/uploads/20221210180758/Untitled-design-(28).png"
+                        class="icn srchicn"
+                        alt="search-button">
+                  </div>
+            </div>
+ {% block content %}
+
+
+ {% endblock content %}
+
+
+
+
+
+
+
+
+
+ 
+</div>
+</div>
+<script>
+    $(document).ready(function(){
+      $("#myModal").modal('show');
+    });
+    </script>
+
+<script>
+        let menuicn = document.querySelector(".menuicn");
+            let nav = document.querySelector(".navcontainer");
+            
+            menuicn.addEventListener("click", () => {
+                nav.classList.toggle("navclose");
+            })
+</script>
+</body>
+</html>

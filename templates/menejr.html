@@ -1,0 +1,317 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}  
+
+
+
+<!-- kutubxonalar -->
+
+
+<link href="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-1.13.5/b-2.4.1/b-html5-2.4.1/b-print-2.4.1/datatables.min.css" rel="stylesheet"/>
+          
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-1.13.5/b-2.4.1/b-html5-2.4.1/b-print-2.4.1/datatables.min.css" rel="stylesheet"/>
+
+<link rel='stylesheet' href="{% static 'assets/css/g2.min.css' %}" type='text/css' media='all'>
+<link rel='stylesheet' href="{% static 'assets/css/glog.min.css' %}" type='text/css' media='all'>
+
+<!-- kutubxonalar end -->
+
+
+
+<script>
+
+  document.addEventListener("DOMContentLoaded", function(){
+      var btn = document.getElementById("myBtn");
+      var element = document.getElementById("myToast");
+     
+       
+  
+      // Create toast instance
+      var myToast = new bootstrap.Toast(element);
+
+
+     
+      btn.addEventListener("click", function(){
+          myToast.show();
+      });
+  });
+  </script>
+
+
+
+
+            <section class="service-section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="section_title text-center type_two">
+                               <br><br><br>
+                                <div class="title_whole">
+                                    <h2 class="title"> Menejr </h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!---============spacing==========--->
+                    <div class="pd_bottom_40"></div>
+                    <!---============spacing==========--->
+                  
+                </div>
+                <!---============spacing==========--->
+                <div class="pd_bottom_80"></div>
+                <!---============spacing==========--->
+            </section>
+
+        
+            <div class="container-fluid">
+                <div class="row table-responsive ">
+
+                <table id="example" class="table table-striped table-bordered " style="width:100%">
+
+                    <thead>
+                        <tr >
+                            <th style="text-align: center;">ID</th>
+                            <th style="text-align: center;">F.I.SH</th>
+                            <th style="text-align: center;">Faoliyat turi</th>
+                            <th style="text-align: center;">Tug'ilgan kuni</th>
+                            <th style="text-align: center;">Millati</th>
+                            <th style="text-align: center;">Pasport nomer</th>
+
+                            <th style="text-align: center;">Guvohnoma berilgan sana</th>
+                            <th style="text-align: center;">Guvohnoma tugash sanasi</th>
+                            <th style="text-align: center;">STIR</th>
+                            <th style="text-align: center;">JSHSHR</th>
+
+                            <th style="text-align: center;">Viloyat</th>
+                            <th style="text-align: center;">Tuman</th>
+                            <th style="text-align: center;">Mahala</th>
+                            <th style="text-align: center;">Uy Manzili</th>
+                            
+                            <th style="text-align: center;">Telfon raqam</th>
+                            <th style="text-align: center;">Email</th>
+                            <th style="text-align: center;">Fuqorolik</th>
+
+                            <th style="text-align: center;">Faoliyat viloyati</th>
+                            <th style="text-align: center;">Faoliyat tumani</th>
+              
+                            <th style="text-align: center;">Faoliyat uy manzili</th>
+
+                            <th style="text-align: center;">Kasbi</th>
+                          
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in anketa %}
+                        <tr style="text-align: center;">
+                              <td >{{ forloop.counter }}</td>
+                            <td>{{i.sur_name }}  {{i.fist_name }}  {{i.mid_name }}  </td>
+                            {% if None == i.job %}
+                                <td>Ma'lumot yo'q</td>
+                            {% else %}
+                                <td>{{i.job}}</td>
+                            {% endif %}
+
+                            {% if None == i.birthday %}
+                                <td>Ma'lumot yo'q</td>
+                            {% else %}
+                            <td>{{i.birthday}}</td>
+                            {% endif %}
+
+                            {% if None == i.millati %}
+                                <td>Ma'lumot yo'q</td>
+                            {% else %}
+                                <td>{{i.millati}}</td>
+                            {% endif %}
+
+                            {% if None == i.pport_no %}
+                                <td>Ma'lumot yo'q</td>
+                            {% else %}
+                                <td>{{i.pport_no}}</td>
+                            {% endif %}
+                            {% if None == i.guvohnoma_start_date %}
+                                <td>Ma'lumot yo'q</td>
+                            {% else %}
+                                <td>{{i.guvohnoma_start_date}}</td>
+                            {% endif %}
+                            {% if None == i.guvohnoma_end_date %}
+                                <td>Ma'lumot yo'q</td>
+                            {% else %}
+                                <td>{{i.guvohnoma_end_date}}</td>
+                            {% endif %}
+                            
+                            {% if None == i.tin %}
+                                <td>Ma'lumot yo'q</td>
+                            {% else %}
+                                <td>{{i.tin}}</td>
+                            {% endif %}
+                            
+                            {% if None == i.pin %}
+                                <td>Ma'lumot yo'q</td>
+                            {% else %}
+                                <td>{{i.pin}}</td>
+                            {% endif %}
+
+                            {% if None == i.viloyati %}
+                                <td>Ma'lumot yo'q</td>
+                            {% else %}
+                                <td>{{i.viloyati}}</td>
+                            {% endif %}
+
+                            {% if None == i.tumani %}
+                                <td>Ma'lumot yo'q</td>
+                            {% else %}
+                                <td>{{i.tumani}}</td>
+                            {% endif %}
+
+                            {% if None == i.mahalla %}
+                                <td>Ma'lumot yo'q</td>
+                            {% else %}
+                                <td>{{i.mahalla}}</td>
+                            {% endif %}
+
+                            {% if None == i.yashash_manzili %}
+                                <td>Ma'lumot yo'q</td>
+                            {% else %}
+                                <td>{{i.yashash_manzili}}</td>
+                            {% endif %}
+
+                            {% if None == i.phone %}
+                                <td>Ma'lumot yo'q</td>
+                            {% else %}
+                                <td>{{i.phone}}</td>
+                            {% endif %}
+                          
+                            {% if None == i.email %}
+                                <td>Ma'lumot yo'q</td>
+                            {% else %}
+                                <td>{{i.email}}</td>
+                            {% endif %}
+                            
+                            {% if None == i.ctzn %}
+                                <td>Ma'lumot yo'q</td>
+                            {% else %}
+                                <td>{{i.ctzn}}</td>
+                            {% endif %}
+
+                            {% if None == i.fl_address_V %}
+                                <td>Ma'lumot yo'q</td>
+                            {% else %}
+                                <td>{{i.fl_address_V}}</td>
+                            {% endif %}
+
+                            {% if None == i.fl_address_T %}
+                                <td>Ma'lumot yo'q</td>
+                            {% else %}
+                                <td>{{i.fl_address_T}}</td>
+                            {% endif %}
+
+                            {% if None == i.fl_address_U %}
+                                <td>Ma'lumot yo'q</td>
+                            {% else %}
+                                <td>{{i.fl_address_U}}</td>
+                            {% endif %}
+
+                            {% if None == i.job %}
+                                <td>Ma'lumot yo'q</td>
+                            {% else %}
+                                <td>{{i.job}}</td>
+                            {% endif %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                        <tr >
+                            <th style="text-align: center;">ID</th>
+                            <th style="text-align: center;">F.I.SH</th>
+                            <th style="text-align: center;">Faoliyat turi</th>
+                            <th style="text-align: center;">Tug'ilgan kuni</th>
+                            <th style="text-align: center;">Millati</th>
+                            <th style="text-align: center;">Pasport nomer</th>
+                            
+                            <th style="text-align: center;">Guvohnoma berilgan sana</th>
+                            <th style="text-align: center;">Guvohnoma tugash sanasi</th>
+                            <th style="text-align: center;">STIR</th>
+                            <th style="text-align: center;">JSHR</th>
+                            <th style="text-align: center;">Viloyat</th>
+                            <th style="text-align: center;">Tuman</th>
+                            <th style="text-align: center;">Mahala</th>
+                            <th style="text-align: center;">Uy Manzili</th>
+                            <th style="text-align: center;">Telfon raqam</th>
+                            <th style="text-align: center;">Email</th>
+                            <th style="text-align: center;">Fuqorolik</th>
+                            <th style="text-align: center;">Faoliyat viloyati</th>
+                            <th style="text-align: center;">Faoliyat tumani</th>
+              
+                            <th style="text-align: center;">Faoliyat uy manzili</th>
+                            <th style="text-align: center;">Kasbi</th>
+                    
+                          
+                        </tr>
+                    </tfoot>
+                </table>
+               
+                </div>
+                
+            </div>
+
+
+            <script type='text/javascript' src="{% static 'assets/js/jquery-3.7.0.js' %}"></script>
+            <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+            <script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script>
+
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+            <script src="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-1.13.5/b-2.4.1/b-html5-2.4.1/b-print-2.4.1/datatables.min.js"></script>
+            <script>
+              $("#example").DataTable({
+                  paging:true,
+                  pagelength:15,
+                  lengthChange:false,
+                  autoWidth:true,
+                  searching:true,
+                  bInfo:false,
+                  bSort:true,
+                  scrollCollapse:false,
+                  dom: 'lBfrtip',
+                  buttons:[
+                    {
+                      extend:'copy',
+                      text:"<img src='{% static 'assets/images/files.png' %}' >",
+                      className: "btn btn-light",
+                      titleAttr:"Copy",
+                      style:'margin-top:15px'
+                    },
+                    {
+                      extend:'excel',
+                      text:"<img src='{% static 'assets/images/excel.png' %}' >",
+                      className: "btn btn-light",
+                      titleAttr:"Excel",
+                    },
+                    {
+                      extend:'print',
+                      text:"<img src='{% static 'assets/images/printer.png' %}' >",
+                      className: "btn btn-light",
+                      titleAttr:"Print",
+                    },
+                  ],
+                
+                  oLanguage:{
+                    sSearch:"",
+              
+                  },
+                 
+              });
+          
+          </script>
+
+
+
+
+
+
+
+
+
+      {% endblock content %}

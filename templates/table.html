@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <form>
+        <label for="fileInput">Select file (limit 2 MB):</label><br>
+        <input type="file" id="fileInput">
+        <button type="submit">Submit</button>
+        <span id="info"></span>
+      </form>
+      <script>
+        const input = document.getElementById("fileInput");
+        input.addEventListener('change', () => {
+          validateSize();
+        })
+        document.querySelector('form').addEventListener('submit', (e) => {
+          e.preventDefault(); // Prevents default HTML submission
+          validateSize(); // Checks file size
+          // Optionally add more validation functions
+          alert("Uploading..."); // Add code to upload file here
+        });
+        function validateSize() {
+          const file = document.getElementById("fileInput").files[0];
+          if (!file) {
+              alert("Error: You need to select a file");
+              throw new Error("No file");
+          }
+          const limit = 2000;
+          const size = Math.round(file.size/1024);
+          if (size < limit) {
+              alert(`File size OK: ${size} bytes`);
+          } else {
+              alert(`Error: File larger than 2MB (${(size/1000).toFixed(2)} MB)`);
+              throw new Error(`File too large: ${size} bytes`);
+          }
+        }
+      </script>
+</body>
+</html>

@@ -1,0 +1,147 @@
+{% extends 'Hunarmand_Admin/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="box-container">
+  <a href="{% url 'kelgan_ariza' %}" class="nav-link" id="fill-tab-2">
+  <div class="box box1">
+      <img src="{% static 'hunarmand_admin/images/email.gif' %}"
+  alt="Views">
+      <div class="text">
+          <h2 class="topic-heading">{{kelgan_ariza_soni}}</h2>
+          <h2 class="topic">Kelgan arizalar</h2>
+      </div>
+
+
+  </div>
+  </a>
+  
+  <a href="{% url 'kutilmoqda' %}">
+    <div class="box box3">
+      <img src="{% static 'hunarmand_admin/images/sand-clock.gif' %}"
+          alt="comments">
+      <div class="text">
+          <h2 class="topic-heading">{{jarayonda}}</h2>
+          <h2 class="topic">Jarayonda</h2>
+      </div>
+
+      
+  </div>
+  </a>
+  
+  <a href="{% url 'conf' %}">
+    <div class="box box2">
+      <img src="{% static 'hunarmand_admin/images/user (1).gif' %}"
+          alt="likes">
+      <div class="text">
+          
+          <h2 class="topic-heading">{{confirm}}</h2>
+          <h2 class="topic">Tasdiqlangan</h2>
+      </div>
+
+    
+  </div>
+  </a>
+
+
+
+  <a href="{% url 'cancel' %}">
+    <div class="box box4">
+      <img src="{% static 'hunarmand_admin/images/delivery (1).gif' %}" alt="published">
+      <div class="text">
+          <h2 class="topic-heading">{{cancel}}</h2>
+          <h2 class="topic">Bekor qilganlar</h2>
+      </div>
+
+      
+  </div>
+  </a>
+</div>
+
+            <div class="container report-container">
+                <div style="margin: 0 10px;" class="row table-responsive   ">
+                    <div class="report-header">
+                        <h1 class="recent-Articles">Tasdiqlangan</h1>
+                       
+                    </div>
+                    <table id="example" class="table table-striped table-bordered" style="width:100%; text-align: center;justify-content: center;align-items: center;">
+            
+                      <thead style="background-color: #fff;">
+                          <tr>
+                              <th style="background-color: #fff;">Sana</th>
+                              <th style="background-color: #fff;">Ism Familya Sharif</th>
+                              <th style="background-color: #fff;">Faoliyat turi</th>
+                              
+                        
+                           
+                           
+                            
+                          </tr>
+                      </thead>
+                      <tbody>
+                          {% for i in anketa %}
+                          <tr>
+                            
+                              <td>{{i.date1}}</td>
+                            <td><a href="{% url 'ariza_detail' i.id %}">{{i.fist_name }}  {{i.sur_name}} {{i.mid_name }}</a></td>
+                            {% if i.job %}
+                            <td>{{i.job}}</td>
+                            {% else %}
+                            <td>Ma'lumot yo'q</td>
+                            {% endif %}
+
+
+                            
+                     
+                         
+                            
+                    
+                          </tr>
+                          {% endfor %}
+                         
+                      </tbody>
+           
+                  </table>
+               
+                </div>
+                <!-- <center>
+                  {%if page_obj.has_previous %} {# whether the previous page exists #}
+                      <a href="?page={{page_obj.previous_page_number}}"><</a> {# link to the prev page #}
+                  {% endif %}
+                  <span>{{page_obj.number}}</span> {# the current page number #}
+                  
+                  {%if page_obj.has_next %} {# whether the next page exists #}
+                      <a href="?page={{page_obj.next_page_number}}">></a> {# link to the next page #}
+                  {% endif %}
+              </center> -->
+                <!-- <nav  aria-label="Пример навигации по страницам">
+                  <br><br>
+                    <ul style="justify-content: center; " class="pagination">
+                      {%if page_obj.has_previous %}
+                      <li class="page-item">
+                        <a class="page-link" href="?page={{page_obj.previous_page_number}}" aria-label="Предыдущая">
+                          <span aria-hidden="true">&laquo;</span>
+                        </a>
+                      </li>
+                      {% endif %}
+                     
+                     <ul class="pagination">
+                        {% for page_number in page_obj.paginator.page_range %}
+                          <li class="page-item {% if page_number == page_obj.number %}active{% endif %}">
+                            <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+                          </li>
+                        {% endfor %}
+                      </ul>
+
+                    {%if page_obj.has_next %}
+                      <li class="page-item" style="font-size: 30px;"  >
+                        <a class="page-link" href="?page={{page_obj.next_page_number}}" aria-label="Следующая">
+                          <span aria-hidden="true">&raquo;</span>
+                        </a>
+                      </li>
+                      
+                      {% endif %}
+                    </ul >
+                  </nav> -->
+            </div>
+{% endblock content %}
