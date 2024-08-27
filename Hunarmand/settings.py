@@ -15,7 +15,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
@@ -25,8 +24,8 @@ SECRET_KEY = 'django-insecure-kcx!r=)%gp81o*%=vi8aee-1m7(4$(icw%2$ga&b4a51&2$+%d
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*","localhost", "127.0.0.1"]
-
+ALLOWED_HOSTS = ["*", "localhost", "127.0.0.1"]
+CSRF_TRUSTED_ORIGINS = ['https://milliy.handicrafters.uz']
 
 # Application definition
 
@@ -42,7 +41,7 @@ INSTALLED_APPS = [
     ######################
     'rest_framework_simplejwt',
     'rest_framework.authtoken',
-    'corsheaders',  
+    'corsheaders',
     'crispy_forms',
     'rest_framework',
     'import_export',
@@ -63,10 +62,9 @@ MIDDLEWARE = [
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 ROOT_URLCONF = 'Hunarmand.urls'
 
-
-#CORS_ALLOWED_ORIGINS = [
- #  'https://handicraftman.uz/',
-#]
+# CORS_ALLOWED_ORIGINS = [
+#  'https://handicraftman.uz/',
+# ]
 # CORS_ALLOW_ALL_ORIGINS = True
 
 REST_FRAMEWORK = {
@@ -75,26 +73,11 @@ REST_FRAMEWORK = {
     ],
 }
 
-
-
-
-
-
 import datetime
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': datetime.timedelta(days=365),
 }
-
-
-
-
-
-
-
-
-
-
 
 TEMPLATES = [
     {
@@ -114,7 +97,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Hunarmand.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 DATABASES = {
@@ -122,15 +104,10 @@ DATABASES = {
     'default': {
 
         'ENGINE': 'django.db.backends.postgresql',
-
         'NAME': 'hunarmand',
-
-        'USER': 'hunarmand_user',
-
-        'PASSWORD': 'hunarmand!@#',
-
+        'USER': 'postgres',
+        'PASSWORD': 'jk1361230',
         'HOST': 'localhost',
-
         'PORT': '5432',
 
     }
@@ -153,7 +130,6 @@ DATABASES = {
 
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
@@ -172,18 +148,16 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 from django.utils.translation import gettext_lazy as _
 
 LANGUAGES = [
-   ('uz', _('Uz')),
-   ('en', _('En')),
+    ('uz', _('Uz')),
+    ('en', _('En')),
 ]
 
 LANGUAGE_CODE = 'uz'
-
 
 TIME_ZONE = 'UTC'
 
@@ -196,8 +170,6 @@ USE_TZ = True
 LOCALE_PATHS = [
     os.path.join(BASE_DIR, 'locale'),
 ]
-
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
